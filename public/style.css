@@ -1,107 +1,140 @@
-/* Resetting default styles */
+/* Reset defaults */
 body, h1, p, input, button {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
-/* Body styling */
+/* Body and main container */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-    text-align: center;
-    overflow: hidden;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* Title styling */
+.container {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Title */
 .title {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    font-weight: bold;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  font-weight: bold;
 }
 
-/* Input container and button styling */
+/* Input + Button */
 .input-container {
-    margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 input {
-    padding: 15px;
-    font-size: 1.2rem;
-    width: 300px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
+  padding: 12px;
+  font-size: 1.1rem;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: #45a049;
+  background-color: #45a049;
 }
 
-/* Loading bar styling */
+/* Dynamic area reserves vertical space to prevent shifting */
+.dynamic-area {
+  height: 160px; /* Enough for loading bar + steps/reveal */
+  position: relative;
+}
+
+/* Loading wrapper to center bar horizontally */
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/* Loading bar container */
 .loading-container {
-    width: 80%;
-    height: 20px;
-    background-color: white;
-    margin-top: 20px;
-    display: none;
-    margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
+  height: 20px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  display: none;
+  margin: 0 auto;
 }
 
 .loading-bar {
-    width: 0;
-    height: 100%;
-    background-color: green;
-    transition: width 10s linear;
+  width: 0;
+  height: 100%;
+  background-color: green;
+  transition: width 10s linear;
 }
 
-/* Step text styling */
-.reading-steps .step {
-    font-size: 1.2rem;
-    display: none;
-    margin-top: 20px;
-}
-
-/* Final reveal text styling */
+/* Steps and reveal share same space, centered vertically */
+.reading-steps,
 .reveal-text {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-top: 20px;
-    display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
 }
 
-/* Explosion GIF styling (hidden initially and centered) */
+.reading-steps .step {
+  font-size: 1.2rem;
+  display: none;
+  margin: 0;
+}
+
+.reveal-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: none;
+}
+
+/* Explosion GIF centered, large, and with fade animation */
 .explosion-gif {
-    width: 500px;
-    margin-top: 30px;
-    display: none;
-    animation: fadeInOut 3s forwards;
-    margin-left: auto;
-    margin-right: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  display: none;
+  z-index: 10;
+  animation: fadeInOut 3s forwards;
 }
 
 @keyframes fadeInOut {
-    0% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
