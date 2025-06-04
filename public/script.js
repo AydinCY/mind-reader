@@ -5,52 +5,49 @@ function readMyMind() {
     return;
   }
 
-  // Reset any previous state
-  document.getElementById('revealText').style.display = 'none';
-  document.getElementById('explosionGif').style.display = 'none';
+  // Reset everything
   clearAllSteps();
+  document.getElementById('revealText').style.display = 'none';
+  const gif = document.getElementById('explosionGif');
+  gif.style.display = 'none';
 
   // Show loading bar
   const loadingContainer = document.getElementById('loadingContainer');
   const loadingBar = document.getElementById('loadingBar');
   loadingContainer.style.display = 'block';
   loadingBar.style.width = '0%';
-  // Trigger the width transition after a tiny delay
+  // Trigger fill over 8 seconds
   setTimeout(() => {
     loadingBar.style.width = '100%';
   }, 50);
 
-  // Steps timing in milliseconds
+  // Steps timing (in ms)
   const steps = [
     { id: 'step1', delay: 0 },
     { id: 'step2', delay: 2000 },
     { id: 'step3', delay: 4000 },
-    { id: 'step4', delay: 7500 },
+    { id: 'step4', delay: 6000 }, // Show step4 at 6s
   ];
 
-  // Show and hide steps sequentially
+  // Show each step in turn, hiding previous
   steps.forEach((stepObj, index) => {
     setTimeout(() => {
-      // Hide the previous step (if any)
       if (index > 0) {
         document.getElementById(steps[index - 1].id).style.display = 'none';
       }
-      // For step4, generate new large number
       if (stepObj.id === 'step4') {
+        // Generate large number
         const xNumber = Math.random().toFixed(20).replace('0.', '6.37E+');
         document.getElementById('step4').innerText =
           `CALCULATING ${xNumber} POSSIBLE COMBINATIONS...`;
       }
-      // Show current step
       document.getElementById(stepObj.id).style.display = 'block';
     }, stepObj.delay);
   });
 
-  // When loading finishes at 10s:
+  // After 8 seconds, hide step4 and loading bar, then show reveal and GIF
   setTimeout(() => {
-    // Hide the last step
     document.getElementById('step4').style.display = 'none';
-    // Hide loading bar
     loadingContainer.style.display = 'none';
 
     // Show final reveal text
@@ -58,17 +55,19 @@ function readMyMind() {
     revealText.innerText = `You were thinking of the number ${userNumber} 😱😲`;
     revealText.style.display = 'block';
 
-    // Show explosion GIF
-    const explosionGif = document.getElementById('explosionGif');
-    explosionGif.style.display = 'block';
-    // It will automatically fade out via CSS animation
+    // Show explosion GIF for 2 seconds (animation does fade in/out)
+    gif.style.display = 'block';
+  }, 8000);
+
+  // After 10 seconds total, hide GIF and reveal text so user can try again
+  setTimeout(() => {
+    document.getElementById('revealText').style.display = 'none';
+    document.getElementById('explosionGif').style.display = 'none';
   }, 10000);
 }
 
-// Utility to hide all step paragraphs
 function clearAllSteps() {
-  const allSteps = document.querySelectorAll('.step');
-  allSteps.forEach((el) => {
+  document.querySelectorAll('.step').forEach(el => {
     el.style.display = 'none';
   });
 }
