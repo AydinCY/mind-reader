@@ -1,0 +1,92 @@
+/* Resetting default styles */
+body, h1, p, input, button {
+    margin: 0;
+    padding: 0;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Title styling */
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Input container and button styling */
+.input-container {
+    margin-bottom: 30px;
+}
+
+input {
+    padding: 15px;
+    font-size: 1.2rem;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Loading bar styling */
+.loading-container {
+    width: 80%;
+    height: 20px;
+    background-color: #ddd;
+    margin-top: 20px;
+    display: none;
+}
+
+.loading-bar {
+    width: 0;
+    height: 100%;
+    background-color: green;
+    transition: width 10s linear;
+}
+
+/* Step text styling */
+.reading-steps .step {
+    font-size: 1.2rem;
+    display: none;
+    margin-top: 20px;
+}
+
+/* Final reveal text styling */
+.reveal-text {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 20px;
+    display: none;
+}
+
+/* Explosion GIF styling (initially hidden) */
+.explosion-gif {
+    width: 300px;
+    margin-top: 30px;
+    display: none;
+}
