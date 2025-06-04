@@ -1,65 +1,585 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pick any number you want. I will read your mind.</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔮 The Magnificent Mind Reader 🔮</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Orbitron:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(45deg, #1a0033, #2d1b69, #4a148c, #6a1b9a);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease-in-out infinite;
+            font-family: 'Orbitron', monospace;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Floating mystical particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #fff, transparent);
+            border-radius: 50%;
+            animation: float 20s linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .crystal-ball {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.😎, rgba(138,43,226,0.3), rgba(75,0,130,0.8));
+            border-radius: 50%;
+            margin-bottom: 40px;
+            position: relative;
+            box-shadow: 
+                0 0 50px rgba(138,43,226,0.6),
+                inset 0 0 50px rgba(255,255,255,0.2);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 50px rgba(138,43,226,0.6), inset 0 0 50px rgba(255,255,255,0.2);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 0 80px rgba(138,43,226,0.😎, inset 0 0 50px rgba(255,255,255,0.3);
+            }
+        }
+        
+        .crystal-ball::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 25%;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9), transparent);
+            border-radius: 50%;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .title {
+            font-family: 'Creepster', cursive;
+            font-size: 3.5rem;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 
+                0 0 10px rgba(138,43,226,0.😎,
+                0 0 20px rgba(138,43,226,0.6),
+                0 0 30px rgba(138,43,226,0.4);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { 
+                text-shadow: 
+                    0 0 10px rgba(138,43,226,0.😎,
+                    0 0 20px rgba(138,43,226,0.6),
+                    0 0 30px rgba(138,43,226,0.4);
+            }
+            to { 
+                text-shadow: 
+                    0 0 20px rgba(138,43,226,1),
+                    0 0 30px rgba(138,43,226,0.😎,
+                    0 0 40px rgba(138,43,226,0.6);
+            }
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #c4b5fd;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+        
+        .input-section {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(138,43,226,0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .input-section:hover {
+            border-color: rgba(138,43,226,0.6);
+            box-shadow: 0 8px 32px rgba(138,43,226,0.2);
+        }
+        
+        .input-label {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .number-input {
+            width: 100%;
+            max-width: 200px;
+            padding: 15px;
+            font-size: 2rem;
+            text-align: center;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 15px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            color: #4a148c;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .number-input:focus {
+            outline: none;
+            box-shadow: 
+                inset 0 2px 10px rgba(0,0,0,0.1),
+                0 0 0 3px rgba(138,43,226,0.5);
+        }
+        
+        .mind-read-btn {
+            background: linear-gradient(45deg, #6a1b9a, #8e24aa, #ab47bc);
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(138,43,226,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mind-read-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .mind-read-btn:hover::before {
+            left: 100%;
+        }
+        
+        .mind-read-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(138,43,226,0.6);
+        }
+        
+        .mind-read-btn:active {
+            transform: translateY(0);
+        }
+        
+        .mind-read-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .thinking-section {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .thinking-text {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        
+        .mystical-loader {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        
+        .loader-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid transparent;
+            border-top: 3px solid #8e24aa;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        .loader-ring:nth-child(2) {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            border-top-color: #ab47bc;
+            animation-duration: 1.5s;
+            animation-direction: reverse;
+        }
+        
+        .loader-ring:nth-child(3) {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            border-top-color: #ce93d8;
+            animation-duration: 2s;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .countdown {
+            font-size: 3rem;
+            color: #fff;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(138,43,226,0.8);
+        }
+        
+        .result-section {
+            display: none;
+            text-align: center;
+            animation: dramaticEntrance 1s ease-out;
+        }
+        
+        @keyframes dramaticEntrance {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(10deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(-5deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+        
+        .result-text {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 20px;
+            font-weight: 900;
+            text-shadow: 0 0 30px rgba(255,215,0,0.8);
+        }
+        
+        .revealed-number {
+            font-size: 4rem;
+            color: #ffd700;
+            font-weight: 900;
+            margin: 20px 0;
+            text-shadow: 
+                0 0 20px rgba(255,215,0,0.😎,
+                0 0 40px rgba(255,215,0,0.6);
+            animation: numberReveal 0.5s ease-out;
+        }
+        
+        @keyframes numberReveal {
+            0% { 
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% { 
+                transform: scale(1.3);
+            }
+            100% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .funny-comment {
+            font-size: 1.3rem;
+            color: #c4b5fd;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .again-btn {
+            background: linear-gradient(45deg, #2e7d32, #388e3c, #4caf50);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76,175,80,0.4);
+        }
+        
+        .again-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76,175,80,0.6);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .crystal-ball {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .input-section {
+                padding: 30px 20px;
+            }
+            
+            .number-input {
+                font-size: 1.5rem;
+            }
+            
+            .mind-read-btn {
+                font-size: 1.2rem;
+                padding: 15px 30px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Title forced into two lines -->
-    <h1 class="title">
-      Pick any number you want.<br />
-      I will read your mind.
-    </h1>
-
-    <!-- Input Box and Button -->
-    <div class="input-container">
-      <input type="number" id="userInput" placeholder="Enter your number" />
-      <button onclick="readMyMind()">Read My Mind!</button>
-    </div>
-
-    <!-- Reserved dynamic area to prevent shifting -->
-    <div class="dynamic-area">
-      <!-- Loading Bar -->
-      <div class="loading-wrapper">
-        <div class="loading-container" id="loadingContainer">
-          <div id="loadingBar" class="loading-bar"></div>
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <div class="crystal-ball"></div>
+        
+        <h1 class="title">🔮 MIND READER 🔮</h1>
+        <p class="subtitle">I can read your thoughts... Think of a number, and I'll guess it!</p>
+        
+        <div class="input-section" id="inputSection">
+            <div class="input-label">Think of a number between 1-100:</div>
+            <input type="number" class="number-input" id="numberInput" min="1" max="100" placeholder="?">
+            <br>
+            <button class="mind-read-btn" id="mindReadBtn">🧠 READ MY MIND 🧠</button>
         </div>
-      </div>
-
-      <!-- Second loading GIF under the bar -->
-      <div class="loading-gif-wrapper">
-        <img
-          id="loadingGif"
-          src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnJmZHl4YXZxYTBwdzFxc2IyNmwwMHRqbnJ1MGJ5OHVzdzlzdGpvYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/ztisqLhP99tVSHG136/giphy.gif"
-          alt="Loading..."
-          class="loading-gif"
-        />
-      </div>
-
-      <!-- Mind Reading Steps -->
-      <div class="reading-steps">
-        <p id="step1" class="step">READING YOUR MIND...</p>
-        <p id="step2" class="step">ANALYZING BRAIN PATTERN...</p>
-        <p id="step3" class="step">CONNECTING TO YOUR BRAIN VIA BLUETOOTH...</p>
-        <p id="step4" class="step">CALCULATING X POSSIBLE COMBINATIONS...</p>
-      </div>
-
-      <!-- Final Reveal -->
-      <p id="revealText" class="reveal-text"></p>
+        
+        <div class="thinking-section" id="thinkingSection">
+            <div class="thinking-text">🌟 Connecting to the cosmic consciousness... 🌟</div>
+            <div class="mystical-loader">
+                <div class="loader-ring"></div>
+                <div class="loader-ring"></div>
+                <div class="loader-ring"></div>
+            </div>
+            <div class="countdown" id="countdown">10</div>
+            <div style="color: #c4b5fd; font-size: 1.1rem;" id="thinkingMessage">
+                Scanning brainwaves...
+            </div>
+        </div>
+        
+        <div class="result-section" id="resultSection">
+            <div class="result-text">🎭 I HAVE READ YOUR MIND! 🎭</div>
+            <div class="revealed-number" id="revealedNumber">42</div>
+            <div class="funny-comment" id="funnyComment">
+                "Elementary, my dear Watson! Your thoughts are an open book... a very short book." 📚
+            </div>
+            <button class="again-btn" id="againBtn">Try Again! 🎲</button>
+        </div>
     </div>
-  </div>
 
-  <!-- Restored original explosion GIF (transparent background) -->
-  <img
-    id="explosionGif"
-    src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXpjcmkyZWZkNGdqNjd1ZjV2Zzg0aTFnd3g1OWpuaDlwMHZoZWI5diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/ibjOWWBs0x3c2syap9/giphy.gif"
-    alt="Explosion"
-    class="explosion-gif"
-  />
-
-  <script src="script.js"></script>
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Funny comments for the reveal
+        const funnyComments = [
+            "Elementary, my dear Watson! Your thoughts are an open book... a very short book. 📚",
+            "Wow, such creativity! Did you use a random number generator in your brain? 🤖",
+            "I see you're a person of simple pleasures... and simple numbers! 😄",
+            "Your mind is like a steel trap... rusty and forgotten in someone's garage! 🔧",
+            "Fascinating! You think in numbers... most humans think in confused grunts! 🦍",
+            "Incredible! I'm starting to think you might actually be predictable! 🎯",
+            "Your thought process is so clear... like muddy water! 💧",
+            "Amazing! It's like you wanted me to guess that number! 🎪"
+        ];
+        
+        // Thinking messages that change during countdown
+        const thinkingMessages = [
+            "Scanning brainwaves...",
+            "Analyzing neural patterns...",
+            "Consulting the crystal ball...",
+            "Asking my psychic hamster...",
+            "Checking the cosmic database...",
+            "Bribing the universe for answers...",
+            "Pretending to be mysterious...",
+            "Actually just waiting 10 seconds...",
+            "Final calculations...",
+            "Preparing dramatic reveal..."
+        ];
+        
+        let countdownInterval;
+        let thinkingMessageInterval;
+        
+        document.getElementById('mindReadBtn').addEventListener('click', function() {
+            const numberInput = document.getElementById('numberInput');
+            const userNumber = numberInput.value;
+            
+            if (!userNumber || userNumber < 1 || userNumber > 100) {
+                alert('Please enter a number between 1 and 100!');
+                return;
+            }
+            
+            // Hide input section and show thinking section
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('thinkingSection').style.display = 'block';
+            
+            // Start countdown
+            let timeLeft = 10;
+            const countdownElement = document.getElementById('countdown');
+            const thinkingMessageElement = document.getElementById('thinkingMessage');
+            
+            // Update thinking message every second
+            let messageIndex = 0;
+            thinkingMessageInterval = setInterval(() => {
+                thinkingMessageElement.textContent = thinkingMessages[messageIndex];
+                messageIndex = (messageIndex + 1) % thinkingMessages.length;
+            }, 1000);
+            
+            countdownInterval = setInterval(() => {
+                timeLeft--;
+                countdownElement.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    clearInterval(thinkingMessageInterval);
+                    
+                    // Make API call
+                    fetch(/guess/${userNumber})
+                        .then(response => response.json())
+                        .then(data => {
+                            // Show result
+                            document.getElementById('thinkingSection').style.display = 'none';
+                            document.getElementById('resultSection').style.display = 'block';
+                            document.getElementById('revealedNumber').textContent = data.guess;
+                            document.getElementById('funnyComment').textContent = 
+                                funnyComments[Math.floor(Math.random() * funnyComments.length)];
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Oops! My psychic powers are temporarily offline. Try again!');
+                            resetApp();
+                        });
+                }
+            }, 1000);
+        });
+        
+        document.getElementById('againBtn').addEventListener('click', resetApp);
+        
+        function resetApp() {
+            // Reset all sections
+            document.getElementById('inputSection').style.display = 'block';
+            document.getElementById('thinkingSection').style.display = 'none';
+            document.getElementById('resultSection').style.display = 'none';
+            
+            // Clear input
+            document.getElementById('numberInput').value = '';
+            
+            // Reset countdown
+            document.getElementById('countdown').textContent = '10';
+            
+            // Clear intervals if they exist
+            if (countdownInterval) clearInterval(countdownInterval);
+            if (thinkingMessageInterval) clearInterval(thinkingMessageInterval);
+        }
+        
+        // Initialize particles when page loads
+        window.addEventListener('load', createParticles);
+        
+        // Allow Enter key to submit
+        document.getElementById('numberInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('mindReadBtn').click();
+            }
+        });
+    </script>
 </body>
 </html>
