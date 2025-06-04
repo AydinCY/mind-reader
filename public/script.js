@@ -5,7 +5,7 @@ function readMyMind() {
     return;
   }
 
-  // Reset everything
+  // Reset previous state
   clearAllSteps();
   document.getElementById('revealText').style.display = 'none';
   const gif = document.getElementById('explosionGif');
@@ -16,7 +16,8 @@ function readMyMind() {
   const loadingBar = document.getElementById('loadingBar');
   loadingContainer.style.display = 'block';
   loadingBar.style.width = '0%';
-  // Trigger fill over 8 seconds
+
+  // Start filling over 8 seconds
   setTimeout(() => {
     loadingBar.style.width = '100%';
   }, 50);
@@ -26,10 +27,10 @@ function readMyMind() {
     { id: 'step1', delay: 0 },
     { id: 'step2', delay: 2000 },
     { id: 'step3', delay: 4000 },
-    { id: 'step4', delay: 6000 }, // Show step4 at 6s
+    { id: 'step4', delay: 6000 }, // Shows at 6s
   ];
 
-  // Show each step in turn, hiding previous
+  // Show each step in turn (2s apart), hiding the previous one
   steps.forEach((stepObj, index) => {
     setTimeout(() => {
       if (index > 0) {
@@ -45,7 +46,7 @@ function readMyMind() {
     }, stepObj.delay);
   });
 
-  // After 8 seconds, hide step4 and loading bar, then show reveal and GIF
+  // At 8 seconds, hide step4 + loading bar, then show final reveal + GIF
   setTimeout(() => {
     document.getElementById('step4').style.display = 'none';
     loadingContainer.style.display = 'none';
@@ -55,15 +56,11 @@ function readMyMind() {
     revealText.innerText = `You were thinking of the number ${userNumber} 😱😲`;
     revealText.style.display = 'block';
 
-    // Show explosion GIF for 2 seconds (animation does fade in/out)
+    // Show explosion GIF (2-second fadeIn/fadeOut)
     gif.style.display = 'block';
   }, 8000);
 
-  // After 10 seconds total, hide GIF and reveal text so user can try again
-  setTimeout(() => {
-    document.getElementById('revealText').style.display = 'none';
-    document.getElementById('explosionGif').style.display = 'none';
-  }, 10000);
+  // No auto-hide after that—instead, wait until user clicks again
 }
 
 function clearAllSteps() {
