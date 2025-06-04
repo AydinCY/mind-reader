@@ -61,7 +61,7 @@ button:hover {
 
 /* Dynamic area reserves vertical space to prevent shifting */
 .dynamic-area {
-  height: 240px; /* Increased to accommodate second GIF */
+  height: 240px; /* Enough for loading bar + second GIF + steps/reveal */
   position: relative;
 }
 
@@ -92,6 +92,7 @@ button:hover {
 }
 
 /* Second loading GIF styling (under loading bar) */
+/* Attempt to “remove” green screen via mix-blend-mode on a light background */
 .loading-gif-wrapper {
   display: flex;
   justify-content: center;
@@ -101,6 +102,7 @@ button:hover {
 .loading-gif {
   width: 80px;
   display: none;
+  mix-blend-mode: multiply; /* hides green against a light grey background */
 }
 
 /* Steps and reveal share same space, centered vertically */
@@ -135,11 +137,13 @@ button:hover {
   display: none;
   z-index: 10;
   animation: fadeInOut 2s forwards;
+  pointer-events: none; /* so it doesn’t block clicks when invisible */
 }
 
 @keyframes fadeInOut {
   0% {
     opacity: 0;
+    visibility: visible;
   }
   20% {
     opacity: 1;
@@ -149,5 +153,6 @@ button:hover {
   }
   100% {
     opacity: 0;
+    visibility: hidden;
   }
 }
