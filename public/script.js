@@ -8,7 +8,10 @@ function readMyMind() {
 
     // Show loading bar and steps
     document.getElementById('loadingContainer').style.display = 'block';
-    document.getElementById('loadingBar').style.width = '100%';
+    document.getElementById('loadingBar').style.width = '0%';
+    setTimeout(() => {
+        document.getElementById('loadingBar').style.width = '100%';
+    }, 50); // Starts the loading bar with a slight delay
 
     // Reset previous reveal text and steps
     document.getElementById('revealText').style.display = 'none';
@@ -21,7 +24,7 @@ function readMyMind() {
             steps[stepIndex].style.display = 'block';
             stepIndex++;
         }
-    }, 2500); // Show each step after 2.5 seconds
+    }, 2500); // Show each step one after the other at 2.5s intervals
 
     // Display large number for "X POSSIBLE COMBINATIONS"
     setTimeout(() => {
@@ -34,7 +37,7 @@ function readMyMind() {
         document.getElementById('revealText').innerText = `You were thinking of the number ${userNumber} 😱😲`;
         document.getElementById('revealText').style.display = 'block';
         
-        // Show explosion gif
+        // Show explosion gif with fade-in/out effect
         document.getElementById('explosionGif').style.display = 'block';
 
         // Hide the loading bar and clear interval
