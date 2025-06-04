@@ -20,13 +20,23 @@
       <button onclick="readMyMind()">Read My Mind!</button>
     </div>
 
-    <!-- Reserved area to prevent shifting -->
+    <!-- Reserved dynamic area to prevent shifting -->
     <div class="dynamic-area">
       <!-- Loading Bar -->
       <div class="loading-wrapper">
         <div class="loading-container" id="loadingContainer">
           <div id="loadingBar" class="loading-bar"></div>
         </div>
+      </div>
+
+      <!-- Second loading GIF under the bar -->
+      <div class="loading-gif-wrapper">
+        <img
+          id="loadingGif"
+          src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZW04MTdhZHdxNjdwZzNuNjRnY3cxZ2p1Z2w3bnlhdG9mODh0MzI4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1OrIIOIcRTDaNidc5p/giphy.gif"
+          alt="Loading..."
+          class="loading-gif"
+        />
       </div>
 
       <!-- Mind Reading Steps -->
@@ -42,10 +52,10 @@
     </div>
   </div>
 
-  <!-- Transparent-background explosion GIF (centered, absolute) -->
+  <!-- Restored original explosion GIF (transparent background) -->
   <img
     id="explosionGif"
-    src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
+    src="https://media.giphy.com/media/lXu72d4iKwqek/giphy.gif"
     alt="Explosion"
     class="explosion-gif"
   />
