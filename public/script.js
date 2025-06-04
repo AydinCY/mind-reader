@@ -8,8 +8,13 @@ function readMyMind() {
   // Reset previous state
   clearAllSteps();
   document.getElementById('revealText').style.display = 'none';
+
   const gif = document.getElementById('explosionGif');
   gif.style.display = 'none';
+
+  // Hide second loading GIF initially
+  const loadingGif = document.getElementById('loadingGif');
+  loadingGif.style.display = 'block';
 
   // Show loading bar
   const loadingContainer = document.getElementById('loadingContainer');
@@ -46,10 +51,11 @@ function readMyMind() {
     }, stepObj.delay);
   });
 
-  // At 8 seconds, hide step4 + loading bar, then show final reveal + GIF
+  // At 8 seconds, hide step4 + loading bar + second GIF, then show final reveal + explosion GIF
   setTimeout(() => {
     document.getElementById('step4').style.display = 'none';
     loadingContainer.style.display = 'none';
+    loadingGif.style.display = 'none';
 
     // Show final reveal text
     const revealText = document.getElementById('revealText');
@@ -59,10 +65,9 @@ function readMyMind() {
     // Show explosion GIF (2-second fadeIn/fadeOut)
     gif.style.display = 'block';
   }, 8000);
-
-  // No auto-hide after that—instead, wait until user clicks again
 }
 
+// Utility to hide all step paragraphs
 function clearAllSteps() {
   document.querySelectorAll('.step').forEach(el => {
     el.style.display = 'none';
