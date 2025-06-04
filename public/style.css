@@ -2,6 +2,7 @@
 body, h1, p, input, button {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 /* Body and main container */
@@ -19,13 +20,13 @@ body {
   width: 100%;
   max-width: 500px;
   padding: 20px;
-  box-sizing: border-box;
   text-align: center;
 }
 
-/* Title */
+/* Title forced into two lines */
 .title {
-  font-size: 2.5rem;
+  font-size: 2rem;
+  line-height: 1.2;
   margin-bottom: 30px;
   font-weight: bold;
 }
@@ -60,11 +61,11 @@ button:hover {
 
 /* Dynamic area reserves vertical space to prevent shifting */
 .dynamic-area {
-  height: 160px; /* Enough for loading bar + steps/reveal */
+  height: 180px; /* Enough for loading bar + steps/reveal text */
   position: relative;
 }
 
-/* Loading wrapper to center bar horizontally */
+/* Center-loading bar wrapper */
 .loading-wrapper {
   display: flex;
   justify-content: center;
@@ -80,14 +81,14 @@ button:hover {
   border-radius: 10px;
   overflow: hidden;
   display: none;
-  margin: 0 auto;
+  margin: 0 auto 10px;
 }
 
 .loading-bar {
   width: 0;
   height: 100%;
   background-color: green;
-  transition: width 10s linear;
+  transition: width 8s linear;
 }
 
 /* Steps and reveal share same space, centered vertically */
@@ -112,26 +113,26 @@ button:hover {
   display: none;
 }
 
-/* Explosion GIF centered, large, and with fade animation */
+/* Explosion GIF styling */
 .explosion-gif {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 400px;
+  width: 500px;
   display: none;
   z-index: 10;
-  animation: fadeInOut 3s forwards;
+  animation: fadeInOut 2s forwards;
 }
 
 @keyframes fadeInOut {
   0% {
     opacity: 0;
   }
-  10% {
+  20% {
     opacity: 1;
   }
-  90% {
+  80% {
     opacity: 1;
   }
   100% {
