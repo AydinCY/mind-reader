@@ -3,34 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mind Reader Gimmick</title>
+    <title>Pick any number you want. I will read your mind.</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Mind Reader Gimmick</h1>
-    <input type="number" id="userInput" placeholder="Enter a number">
-    <button onclick="guessNumber()">Guess My Number!</button>
-    <p id="loading" style="display:none;">Thinking...</p>
-    <p id="result" style="display:none;"></p>
+    <div class="container">
+        <!-- Title -->
+        <h1 class="title">Pick any number you want. I will read your mind.</h1>
 
-    <script>
-        function guessNumber() {
-            const userNumber = document.getElementById('userInput').value;
-            const loadingMessage = document.getElementById('loading');
-            const resultMessage = document.getElementById('result');
+        <!-- Input Box and Button -->
+        <div class="input-container">
+            <input type="number" id="userInput" placeholder="Enter your number">
+            <button onclick="readMyMind()">Read My Mind!</button>
+        </div>
 
-            loadingMessage.style.display = 'block';
-            resultMessage.style.display = 'none';
+        <!-- Loading Bar -->
+        <div class="loading-container">
+            <div id="loadingBar" class="loading-bar"></div>
+        </div>
 
-            fetch(`/guess/${userNumber}`)
-                .then(response => response.json())
-                .then(data => {
-                    setTimeout(() => {
-                        resultMessage.innerText = `I guessed: ${data.guess}`;
-                        loadingMessage.style.display = 'none';
-                        resultMessage.style.display = 'block';
-                    }, 10000);  // Simulate delay
-                });
-        }
-    </script>
+        <!-- Mind Reading Steps -->
+        <div class="reading-steps">
+            <p id="step1" class="step">READING YOUR MIND...</p>
+            <p id="step2" class="step">ANALYZING BRAIN PATTERN...</p>
+            <p id="step3" class="step">CONNECTING TO YOUR BRAIN VIA BLUETOOTH...</p>
+            <p id="step4" class="step">CALCULATING X POSSIBLE COMBINATIONS...</p>
+        </div>
+
+        <!-- Final Reveal -->
+        <p id="revealText" class="reveal-text"></p>
+
+        <!-- Explosion GIF (Hidden initially) -->
+        <img id="explosionGif" src="https://media.giphy.com/media/xT0xezQGUQ3d9GHiU4/giphy.gif" alt="Explosion" class="explosion-gif">
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
