@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Reader Gimmick</title>
+</head>
+<body>
+    <h1>Mind Reader Gimmick</h1>
+    <input type="number" id="userInput" placeholder="Enter a number">
+    <button onclick="guessNumber()">Guess My Number!</button>
+    <p id="loading" style="display:none;">Thinking...</p>
+    <p id="result" style="display:none;"></p>
+
+    <script>
+        function guessNumber() {
+            const userNumber = document.getElementById('userInput').value;
+            const loadingMessage = document.getElementById('loading');
+            const resultMessage = document.getElementById('result');
+
+            loadingMessage.style.display = 'block';
+            resultMessage.style.display = 'none';
+
+            fetch(`/guess/${userNumber}`)
+                .then(response => response.json())
+                .then(data => {
+                    setTimeout(() => {
+                        resultMessage.innerText = `I guessed: ${data.guess}`;
+                        loadingMessage.style.display = 'none';
+                        resultMessage.style.display = 'block';
+                    }, 10000);  // Simulate delay
+                });
+        }
+    </script>
+</body>
+</html>
