@@ -9,18 +9,23 @@ function readMyMind() {
   clearAllSteps();
   document.getElementById('revealText').style.display = 'none';
 
-  const gif = document.getElementById('explosionGif');
-  gif.style.display = 'none';
-
-  // Hide second loading GIF initially
-  const loadingGif = document.getElementById('loadingGif');
-  loadingGif.style.display = 'block';
+  const explosionGif = document.getElementById('explosionGif');
+  explosionGif.style.display = 'none';
+  // Ensure animation is re‐triggered on each click
+  explosionGif.style.animation = 'none';
+  // Force reflow then restore animation
+  void explosionGif.offsetWidth;
+  explosionGif.style.animation = '';
 
   // Show loading bar
   const loadingContainer = document.getElementById('loadingContainer');
   const loadingBar = document.getElementById('loadingBar');
   loadingContainer.style.display = 'block';
   loadingBar.style.width = '0%';
+
+  // Show second loading GIF
+  const loadingGif = document.getElementById('loadingGif');
+  loadingGif.style.display = 'block';
 
   // Start filling over 8 seconds
   setTimeout(() => {
@@ -63,7 +68,7 @@ function readMyMind() {
     revealText.style.display = 'block';
 
     // Show explosion GIF (2-second fadeIn/fadeOut)
-    gif.style.display = 'block';
+    explosionGif.style.display = 'block';
   }, 8000);
 }
 
