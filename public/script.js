@@ -17,14 +17,19 @@ function readMyMind() {
     document.getElementById('revealText').style.display = 'none';
     document.getElementById('explosionGif').style.display = 'none';
     
+    // Sequential steps
     let steps = document.querySelectorAll('.step');
     let stepIndex = 0;
-    let interval = setInterval(() => {
+
+    const stepInterval = setInterval(() => {
         if (stepIndex < steps.length) {
             steps[stepIndex].style.display = 'block';
+            if (stepIndex > 0) {
+                steps[stepIndex - 1].style.display = 'none'; // Hide the previous step
+            }
             stepIndex++;
         }
-    }, 2500); // Show each step one after the other at 2.5s intervals
+    }, 2500); // Show each step after 2.5 seconds
 
     // Display large number for "X POSSIBLE COMBINATIONS"
     setTimeout(() => {
@@ -41,7 +46,7 @@ function readMyMind() {
         document.getElementById('explosionGif').style.display = 'block';
 
         // Hide the loading bar and clear interval
-        clearInterval(interval);
+        clearInterval(stepInterval);
         document.getElementById('loadingContainer').style.display = 'none';
     }, 10000); // After 10 seconds, reveal the result
 }
