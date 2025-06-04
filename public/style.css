@@ -59,6 +59,7 @@ button:hover {
     background-color: white;
     margin-top: 20px;
     display: none;
+    margin-bottom: 20px;
 }
 
 .loading-bar {
@@ -85,10 +86,12 @@ button:hover {
 
 /* Explosion GIF styling (hidden initially and centered) */
 .explosion-gif {
-    width: 300px;
+    width: 500px;
     margin-top: 30px;
     display: none;
     animation: fadeInOut 3s forwards;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 @keyframes fadeInOut {
