@@ -61,7 +61,7 @@ button:hover {
 
 /* Dynamic area reserves vertical space to prevent shifting */
 .dynamic-area {
-  height: 180px; /* Enough for loading bar + steps/reveal text */
+  height: 240px; /* Increased to accommodate second GIF */
   position: relative;
 }
 
@@ -91,11 +91,23 @@ button:hover {
   transition: width 8s linear;
 }
 
+/* Second loading GIF styling (under loading bar) */
+.loading-gif-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.loading-gif {
+  width: 80px;
+  display: none;
+}
+
 /* Steps and reveal share same space, centered vertically */
 .reading-steps,
 .reveal-text {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
