@@ -1,4 +1,4 @@
-async function readMyMind() {
+function readMyMind() {
   const userNumber = document.getElementById('userInput').value;
   if (!userNumber) {
     alert('Please enter a number!');
@@ -11,8 +11,9 @@ async function readMyMind() {
 
   const explosionGif = document.getElementById('explosionGif');
   explosionGif.style.display = 'none';
-  // Re-trigger animation
+  // Ensure animation is re‐triggered on each click
   explosionGif.style.animation = 'none';
+  // Force reflow then restore animation
   void explosionGif.offsetWidth;
   explosionGif.style.animation = '';
 
@@ -49,42 +50,25 @@ async function readMyMind() {
         // Generate large number
         const xNumber = Math.random().toFixed(20).replace('0.', '6.37E+');
         document.getElementById('step4').innerText =
-          `CALCULATING ${xNumber} POSSIBLE COMBINATIONS...`;
+          CALCULATING ${xNumber} POSSIBLE COMBINATIONS...;
       }
       document.getElementById(stepObj.id).style.display = 'block';
     }, stepObj.delay);
   });
 
   // At 8 seconds, hide step4 + loading bar + second GIF, then show final reveal + explosion GIF
-  setTimeout(async () => {
+  setTimeout(() => {
     document.getElementById('step4').style.display = 'none';
     loadingContainer.style.display = 'none';
     loadingGif.style.display = 'none';
 
     // Show final reveal text
     const revealText = document.getElementById('revealText');
-    revealText.innerText = `You were thinking of the number ${userNumber} 😱😲`;
+    revealText.innerText = You were thinking of the number ${userNumber} 😱😲;
     revealText.style.display = 'block';
 
     // Show explosion GIF (2-second fadeIn/fadeOut)
     explosionGif.style.display = 'block';
-
-    // OPTIONAL EMAIL SENDING
-    const userEmail = document.getElementById('emailInput').value.trim();
-    if (userEmail) {
-      try {
-        const resp = await fetch('/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ to: userEmail, number: userNumber })
-        });
-        const { success } = await resp.json();
-        if (!success) throw new Error('Mail failed');
-        console.log(`Email sent to ${userEmail}`);
-      } catch (err) {
-        console.error('Error sending email:', err);
-      }
-    }
   }, 8000);
 }
 
