@@ -31,22 +31,18 @@ body {
   font-weight: bold;
 }
 
-/* Input + Button container */
+/* Input + Button */
 .input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
   margin-bottom: 20px;
 }
 
-input[type="number"],
-input[type="email"] {
+input {
   padding: 12px;
   font-size: 1.1rem;
   width: 250px;
   border-radius: 5px;
   border: 1px solid #ddd;
+  margin-bottom: 10px;
 }
 
 button {
@@ -96,6 +92,7 @@ button:hover {
 }
 
 /* Second loading GIF styling (under loading bar) */
+/* Attempt to “remove” green screen via mix-blend-mode on a light background */
 .loading-gif-wrapper {
   display: flex;
   justify-content: center;
