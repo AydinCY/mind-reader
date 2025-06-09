@@ -1,4 +1,4 @@
-function readMyMind() {
+async function readMyMind() {
   const userNumber = document.getElementById('userInput').value;
   if (!userNumber) {
     alert('Please enter a number!');
@@ -11,9 +11,8 @@ function readMyMind() {
 
   const explosionGif = document.getElementById('explosionGif');
   explosionGif.style.display = 'none';
-  // Ensure animation is re‐triggered on each click
+  // Re-trigger animation
   explosionGif.style.animation = 'none';
-  // Force reflow then restore animation
   void explosionGif.offsetWidth;
   explosionGif.style.animation = '';
 
@@ -57,7 +56,7 @@ function readMyMind() {
   });
 
   // At 8 seconds, hide step4 + loading bar + second GIF, then show final reveal + explosion GIF
-  setTimeout(() => {
+  setTimeout(async () => {
     document.getElementById('step4').style.display = 'none';
     loadingContainer.style.display = 'none';
     loadingGif.style.display = 'none';
@@ -69,6 +68,23 @@ function readMyMind() {
 
     // Show explosion GIF (2-second fadeIn/fadeOut)
     explosionGif.style.display = 'block';
+
+    // OPTIONAL EMAIL SENDING
+    const userEmail = document.getElementById('emailInput').value.trim();
+    if (userEmail) {
+      try {
+        const resp = await fetch('/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ to: userEmail, number: userNumber })
+        });
+        const { success } = await resp.json();
+        if (!success) throw new Error('Mail failed');
+        console.log(`Email sent to ${userEmail}`);
+      } catch (err) {
+        console.error('Error sending email:', err);
+      }
+    }
   }, 8000);
 }
 
